@@ -1,0 +1,32 @@
+<main class="container">
+  <section class="modern-form-card">
+    <div class="modern-form-header">
+      <h2>Criar conta</h2>
+      <p>Crie seu acesso para acompanhar aulas, pagamentos e remarcações.</p>
+    </div>
+
+    <form id="registerForm">
+      <div class="modern-form-grid">
+        <div class="modern-field full">
+          <label for="name">Nome</label>
+          <input id="name" type="text" placeholder="Digite seu nome" required />
+        </div>
+
+        <div class="modern-field full">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="Digite seu e-mail" required />
+        </div>
+
+        <div class="modern-field full">
+          <label for="password">Senha</label>
+          <input id="password" type="password" placeholder="Crie uma senha" required />
+        </div>
+      </div>
+
+      <div class="modern-actions">
+        <button type="submit" class="modern-btn-primary">Cadastrar</button>
+        <a routerLink="/login" class="modern-btn-secondary">Já tenho conta</a>
+      </div>
+    </form>
+  </section>
+</main>
