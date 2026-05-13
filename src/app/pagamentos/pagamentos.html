@@ -17,7 +17,15 @@
           <th>Ação</th>
         </tr>
         </thead>
-        <tbody id="studentsPaymentTableBody"></tbody>
+        <tbody id="studentsPaymentTableBody">
+        @for (aluno of alunos; track aluno.cpf) {
+        <tr>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.curso }}</td>
+            <td>{{ aluno.mensalidade }}</td>
+        </tr>
+        }
+        </tbody>
       </table>
     </div>
   </section>
@@ -44,7 +52,17 @@
           <th>Data</th>
         </tr>
         </thead>
-        <tbody id="paymentsTableBody"></tbody>
+        <tbody id="paymentsTableBody">
+        @for (pagamento of pagamentos; track pagamento.nome) {
+        <tr>
+            <td>{{ pagamento.nomeAluno }}</td>
+            <td>{{ pagamento.curso }}</td>
+            <td>{{ pagamento.valor | currency:'BRL' }}</td>
+            <td>{{ pagamento.status }}</td>
+            <td>{{ pagamento.dataPagamento }}</td>
+        </tr>
+        }
+        </tbody>
       </table>
     </div>
   </section>

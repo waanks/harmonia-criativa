@@ -8,6 +8,11 @@ import { Pagamentos } from './pagamentos/pagamentos';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login'
+  },
+  {
     path: 'login',
     component: Login,
   },
