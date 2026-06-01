@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { CurrencyPipe } from "@angular/common";
+import { AlunoService } from "../core/services/aluno-service";
+import { AlunoResponse } from "../core/models/aluno.model";
 
 @Component({
   selector: "app-pagamentos",
@@ -7,15 +9,25 @@ import { CurrencyPipe } from "@angular/common";
   templateUrl: "./pagamentos.html",
   styleUrl: "./pagamentos.css",
 })
-export class Pagamentos {
-  alunos: any[] = [];
-  pagamentos: any[] = [];
+export class Pagamentos implements OnInit {
+  private alunoService = inject(AlunoService);
+
+  alunos = signal<AlunoResponse[]>([]);
+  erro = signal<string | null>(null);
 
   ngOnInit() {
-    const alunosSalvos = localStorage.getItem("alunos");
-    this.alunos = alunosSalvos ? JSON.parse(alunosSalvos) : [];
+    this.carregarAlunos();
+  }
 
-    const pagamentos = localStorage.getItem("pagamentos");
-    this.pagamentos = pagamentos ? JSON.parse(pagamentos) : [];
+  carregarAlunos(): void {
+    this.alunoService.listarTodos().subscribe({
+      next: (dados) => {
+        this.alunos.set(dados);
+      },
+      error: (err) => {
+        console.error("Erro ao buscar alunos:", err);
+        this.erro.set("Não foi possível carregar a lista de alunos.");
+      },
+    });
   }
 }

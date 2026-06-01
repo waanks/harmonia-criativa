@@ -84,14 +84,14 @@
       </tr>
       </thead>
       <tbody id="studentsTableBody">
-      @for (aluno of alunos; track aluno.cpf) {
+      @for (aluno of alunos(); track aluno.id) {
       <tr>
-          <td>{{ aluno.nome }}</td>
+          <td>{{ aluno.nomeAluno }}</td>
           <td>{{ aluno.telefone | telefone}}</td>
           <td>{{ aluno.curso }}</td>
           <td>{{ aluno.mensalidade | currency:'BRL' }}</td>
-          <td>{{ aluno.diasAulas }}</td>
-          <td>{{ aluno.dataInicio }}</td>
+          <td>{{ aluno.horariosAulas }}</td>
+<!--          <td>{{ aluno.dataInicio }}</td>-->
       </tr>
       }
       </tbody>

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { TelefonePipe } from "../telefone-pipe";
 import { CurrencyPipe } from "@angular/common";
+import { AlunoService } from "../core/services/aluno-service";
+import { AlunoResponse } from "../core/models/aluno.model";
 
 @Component({
   selector: "app-cadastro-aluno",
@@ -10,8 +12,12 @@ import { CurrencyPipe } from "@angular/common";
   styleUrl: "./cadastro-aluno.css",
   standalone: true,
 })
-export class CadastroAluno {
-  alunos: any[] = [];
+export class CadastroAluno implements OnInit {
+  private readonly alunoService = inject(AlunoService);
+
+  alunos = signal<AlunoResponse[]>([]);
+  erro = signal<string | null>(null);
+
   dadosAluno = new FormGroup({
     nome: new FormControl(""),
     email: new FormControl(""),
@@ -27,9 +33,19 @@ export class CadastroAluno {
   });
 
   ngOnInit() {
-    const alunosSalvos = localStorage.getItem("alunos");
+    this.carregarAlunos();
+  }
 
-    this.alunos = alunosSalvos ? JSON.parse(alunosSalvos) : [];
+  carregarAlunos(): void {
+    this.alunoService.listarTodos().subscribe({
+      next: (dados) => {
+        this.alunos.set(dados);
+      },
+      error: (err) => {
+        console.error("Erro ao buscar alunos:", err);
+        this.erro.set("Não foi possível carregar a lista de alunos.");
+      },
+    });
   }
 
   salvarAluno() {

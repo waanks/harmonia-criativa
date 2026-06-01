@@ -18,11 +18,11 @@
         </tr>
         </thead>
         <tbody id="studentsPaymentTableBody">
-        @for (aluno of alunos; track aluno.cpf) {
+        @for (aluno of alunos(); track aluno.id) {
         <tr>
-            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.nomeAluno }}</td>
             <td>{{ aluno.curso }}</td>
-            <td>{{ aluno.mensalidade }}</td>
+            <td>{{ aluno.mensalidade | currency:'BRL'}}</td>
         </tr>
         }
         </tbody>
@@ -53,15 +53,15 @@
         </tr>
         </thead>
         <tbody id="paymentsTableBody">
-        @for (pagamento of pagamentos; track pagamento.nome) {
-        <tr>
-            <td>{{ pagamento.nomeAluno }}</td>
-            <td>{{ pagamento.curso }}</td>
-            <td>{{ pagamento.valor | currency:'BRL' }}</td>
-            <td>{{ pagamento.status }}</td>
-            <td>{{ pagamento.dataPagamento }}</td>
-        </tr>
-        }
+<!--        @for (pagamento of pagamentos; track pagamento.nome) {-->
+<!--        <tr>-->
+<!--            <td>{{ pagamento.nomeAluno }}</td>-->
+<!--            <td>{{ pagamento.curso }}</td>-->
+<!--            <td>{{ pagamento.valor | currency:'BRL' }}</td>-->
+<!--            <td>{{ pagamento.status }}</td>-->
+<!--            <td>{{ pagamento.dataPagamento }}</td>-->
+<!--        </tr>-->
+<!--        }-->
         </tbody>
       </table>
     </div>
