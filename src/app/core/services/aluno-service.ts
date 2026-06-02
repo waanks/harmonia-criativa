@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class AlunoService {
   private http = inject(HttpClient);
-  private apiUrl = "http://harmonia-api-production.up.railway.app/alunos";
+  private apiUrl = "https://harmonia-api-production.up.railway.app/alunos";
 
   listarTodos(): Observable<AlunoResponse[]> {
     return this.http.get<AlunoResponse[]>(this.apiUrl);
